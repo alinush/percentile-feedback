@@ -11,7 +11,8 @@ if [ $# -ne 1 ]; then
 fi
 
 day=$1
-echo "Grepping for day: $day"
+echo "Grepping for day $day..."
+echo
 
 sum=`grep "$day" $scriptdir/periods.txt | cut -f 2,3 -d' ' | awk ' { t = $1; $1 = $2; $2 = t; print; } ' | tr ' ' '-' | tr '\n' '+' | sed 's/\+$//'`
 
@@ -28,5 +29,5 @@ echo "Total minutes: $mintot"
 hours=$(($sum / 3600))
 minutes=$(($mintot % 60))
 
-echo "$hours hr and $minutes min"
-
+echo "You worked: $hours hr and $minutes min"
+echo
