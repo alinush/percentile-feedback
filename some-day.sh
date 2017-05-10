@@ -31,3 +31,19 @@ minutes=$(($mintot % 60))
 
 echo "You worked: $hours hr and $minutes min"
 echo
+
+time=`grep "$day" $scriptdir/periods.txt | tail -n 1  | cut -f 2- -d' '`
+starttime=`echo "$time" | tail -n 1 | cut -f 1 -d' '`
+starth=$(($starttime / 3600))
+startm=$((($starttime / 60) % 60))
+startm=`printf %02d $startm`
+
+endtime=`echo "$time" | tail -n 1 | cut -f 2 -d' '`
+endh=$(($endtime / 3600))
+endm=$((($endtime / 60) % 60))
+endm=`printf %02d $endm`
+
+duration=$((($endtime-$starttime)/60))
+
+echo "Last logged time slot on $day: $starth:$startm to $endh:$endm ($duration minutes)"
+echo
